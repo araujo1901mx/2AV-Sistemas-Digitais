@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação do Projeto - Sistemas Digitais</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>LOCKER</h1>
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="autores.html">Autores</a>
+    <a href="componentes.html">Componentes</a>
+    <a href="codigo.html">Código</a>
+    <a href="extras.html">Extras</a>
+</nav>
+</header>
+
+<main>
+    
+    <section class="card">
+        <h2>Nome do Projeto</h2>
+        <p>
+            LOCKER
+        </p>
+    </section>
+
+    
+    <section class="card">
+        <h2>Descrição do Projeto</h2>
+
+        <h3>Motivação</h3>
+        <p>
+            A segurança de objetos pessoais é uma preocupação comum no dia a dia, especialmente em ambientes onde várias pessoas circulam, como escolas, laboratórios, escritórios ou residências. Muitas soluções de segurança disponíveis são caras ou complexas para quem está iniciando na área de Sistemas Digitais. Assim, a motivação deste projeto é desenvolver um cofre eletrônico simples e de baixo custo, utilizando Arduino e componentes acessíveis. O projeto permite aos estudantes aprenderem ativação por senha, leitura de teclado matricial e controle de dispositivos eletrônicos, criando uma solução prática e funcional.
+        </p>
+
+        <h3>Objetivo</h3>
+        <p>
+            O objetivo deste projeto é construir um cofre eletrônico que só abre quando o usuário digita uma senha correta de 4 dígitos em um teclado matricial. O sistema utiliza um buzzer para fornecer feedback sonoro sempre que uma tecla é pressionada, assim como para indicar se a senha digitada está correta ou incorreta. Dessa forma, o projeto demonstra conceitos importantes como entrada digital, comparação de dados, lógica de autenticação e acionamento de atuadores.
+        </p>
+
+        <h3>Contextualização</h3>
+        <p>
+            Este projeto foi desenvolvido na disciplina de Sistemas Digitais e envolve conceitos fundamentais de eletrônica, microcontroladores e programação embarcada. O sistema é composto por um Arduino, um teclado matricial 4x4, um buzzer e um mecanismo simples de abertura (como um servo motor ou trava elétrica). Quando o usuário digita a senha, o Arduino verifica a combinação e, caso esteja correta, aciona o mecanismo de abertura do cofre. Se estiver errada, o buzzer emite um alerta de erro. A proposta se enquadra na área de automação e segurança eletrônica, mostrando como sistemas digitais podem ser aplicados para resolver problemas reais de forma criativa e acessível.
+        </p>
+        <h3>Esquema Conceitual</h3>
+        <img src="img/Sistema-Cofre.png" alt="Esquema Conceitual" class="img-esquema">
+    </section>
+
+    
+    <section class="card">
+        <h2>Palavras-Chave</h2>
+        <ul>
+            <li>Cofre eletrônico</li>
+            <li>Arduino</li>
+            <li>Segurança digital</li>
+            <li>Autenticação por senha</li>
+            <li>Teclado matricial</li>
+        </ul>
+    </section>
+
+
+<button id="topBtn">↑ Topo</button>
+</main>
+
+
+
+<script src="index.js"></script>
+</body>
+</html>

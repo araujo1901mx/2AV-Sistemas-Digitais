@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Início</a>
+    <a href="autores.html">Autores</a>
+    <a href="componentes.html">Componentes</a>
+    <a href="codigo.html">Código</a>
+    <a href="extras.html">Extras</a>
+</nav>
+
+<!-- BLOCO 1 – CÓDIGO COMPLETO -->
+<div class="subsection">
+    <h3>Código exemplo (Arduino)</h3>
+
+    <pre class="code-block">
+#include &lt;Keypad.h&gt;
+#include &lt;Servo.h&gt;
+
+const byte ROWS = 4;
+const byte COLS = 4;
+char keys[ROWS][COLS] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+byte rowPins[ROWS] = {9,8,7,6};
+byte colPins[COLS] = {5,4,3,2};
+
+Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
+
+Servo lockServo;
+const int servoPin = 11;
+const int buzzerPin = 10;
+
+String senhaCorreta = "1234";
+String entrada = "";
+
+void setup() {
+  Serial.begin(9600);
+  lockServo.attach(servoPin);
+  lockServo.write(0);
+  pinMode(buzzerPin, OUTPUT);
+  digitalWrite(buzzerPin, LOW);
+}
+
+void beep(int ms){
+  digitalWrite(buzzerPin, HIGH);
+  delay(ms);
+  digitalWrite(buzzerPin, LOW);
+}
+
+void loop() {
+  char k = keypad.getKey();
+  if (k) {
+
+    beep(50);
+
+    if (k == '#') {
+      if (entrada == senhaCorreta) {
+        for(int i=0;i<3;i++){ beep(120); delay(80); }
+        lockServo.write(90);
+        delay(3000);
+        lockServo.write(0);
+      } else {
+        for(int i=0;i<2;i++){ beep(250); delay(120); }
+      }
+      entrada = "";
+    } else if (k == '*') {
+      entrada = "";
+    } else {
+      if (isDigit(k) && entrada.length() < 4) {
+        entrada += k;
+      }
+    }
+    Serial.println(entrada);
+  }
+}
+    </pre>
+</div>
+
+
+
+<section class="card">
+
+    <h2>Código do Projeto</h2>
+
+    <p>
+        A seguir estão os trechos essenciais do código utilizados no funcionamento do cofre eletrônico com senha.
+        O código completo pode ser acessado no repositório oficial:
+        <a href="https://github.com/araujo1901mx/Projeto-2AV-Sistemas-Digitais.git" target="_blank">
+            Clique aqui para acessar o código completo
+        </a>.
+    </p>
+
+    <h3>Importações e configuração do teclado</h3>
+    <pre class="code-block">
+#include &lt;Keypad.h&gt;
+#include &lt;Servo.h&gt;
+
+const byte ROWS = 4;
+const byte COLS = 4;
+
+char keys[ROWS][COLS] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+    </pre>
+
+    <p>
+        <strong>Explicação:</strong><br>
+        Importa bibliotecas e define a matriz de teclas do keypad 4x4.
+    </p>
+
+    <h3>Pinos e dispositivos</h3>
+    <pre class="code-block">
+byte rowPins[ROWS] = {9,8,7,6};
+byte colPins[COLS] = {5,4,3,2};
+
+Servo lockServo;
+const int servoPin = 11;
+const int buzzerPin = 10;
+
+String senhaCorreta = "1234";
+String entrada = "";
+    </pre>
+
+    <p>
+        Define teclado, servo, buzzer e a senha correta.
+    </p>
+
+    <h3>Feedback sonoro</h3>
+    <pre class="code-block">
+void beep(int ms){
+  digitalWrite(buzzerPin, HIGH);
+  delay(ms);
+  digitalWrite(buzzerPin, LOW);
+}
+    </pre>
+
+    <h3>Lógica principal</h3>
+    <pre class="code-block">
+char k = keypad.getKey();
+if (k) {
+    beep(50);
+
+    if (k == '#') {
+        if (entrada == senhaCorreta) {
+            lockServo.write(90);
+            delay(3000);
+            lockServo.write(0);
+        } else {
+            beep(250);
+            beep(250);
+        }
+        entrada = "";
+    } else if (isDigit(k) && entrada.length() &lt; 4) {
+        entrada += k;
+    }
+}
+    </pre>
+
+</section>
+
+<button id="topBtn">↑ Topo</button>
+<script src="index.js"></script>
+
+</body>
+</html>

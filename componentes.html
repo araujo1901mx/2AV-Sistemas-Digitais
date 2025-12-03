@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componentes e Montagem</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav>
+    <a href="index.html">Início</a>
+    <a href="autores.html">Autores</a>
+    <a href="componentes.html">Componentes</a>
+    <a href="codigo.html">Código</a>
+    <a href="extras.html">Extras</a>
+</nav>
+
+<section class="card">
+    <h2>Componentes e Suprimentos</h2>
+
+    <ul>
+        <li>
+            <strong>Arduino Uno R3</strong><br>
+            Microcontrolador que controla todo o sistema, fazendo a leitura do teclado, verificando a senha e acionando buzzer e servo motor.
+        </li>
+
+        <li>
+            <strong>Teclado 4x4</strong><br>
+            Utilizado para digitação da senha, funcionando por meio de uma matriz de linhas e colunas.
+        </li>
+
+        <li>
+            <strong>Buzzer</strong><br>
+            Emite sinais sonoros ao pressionar teclas e ao indicar senha correta ou incorreta.
+        </li>
+
+        <li>
+            <strong>Servo Motor</strong><br>
+            Atua como mecanismo de abertura do cofre, girando ao receber o comando do Arduino.
+        </li>
+    </ul>
+    </section>
+
+    <section class="card">
+  <h2>Passo a Passo da Montagem (resumo em 1 imagem)</h2>
+
+
+  <img src="img/passo-a-passo.png" alt="Resumo passo a passo do projeto - 8 passos" class="single-step-img">
+ 
+  <ol class="steps-compact">
+    <li>
+      <strong>Passo 1 — Preparar componentes</strong><br>
+      Separe: 1x Arduino Uno R3, 1x teclado matricial 4x4, 1x buzzer 5V (módulo KY-012 ou buzzer solto),
+      1x servo SG90, cabos jumper, protoboard (opcional) e fonte USB (power bank). Verifique integridade.
+    </li>
+
+    <li>
+      <strong>Passo 2 — Posicionar e alimentar</strong><br>
+      Coloque o Arduino próximo ao local onde ficará o teclado e o servo. Prepare a fonte (power bank ou cabo USB).
+      Não ligue até concluir as conexões.
+    </li>
+
+    <li>
+      <strong>Passo 3 — Conectar o teclado 4x4</strong><br>
+      Ligue as 8 linhas do teclado aos pinos digitais definidos no código (ex.: ROWS → 9,8,7,6 e COLS → 5,4,3,2).
+      Use fios firmes e verifique o mapeamento no sketch.
+    </li>
+
+    <li>
+      <strong>Passo 4 — Conectar o buzzer</strong><br>
+      Conecte o polo positivo do buzzer a um pino digital (ex.: 10) e o negativo ao GND. O buzzer dará feedback a cada tecla,
+      e sons diferenciados para sucesso/erro.
+    </li>
+
+    <li>
+      <strong>Passo 5 — Conectar o servo (mecanismo de trava)</strong><br>
+      Conecte sinal do servo ao pino PWM (ex.: 11), VCC ao +5V e GND ao GND do Arduino. Garanta que a fonte suporta a corrente.
+    </li>
+
+    <li>
+      <strong>Passo 6 — Organizar montagem e fixar</strong><br>
+      Agrupe fios, prenda protoboard e servo na caixa/cofre temporária. Garanta folga mecânica do servo para abrir a trava.
+    </li>
+
+    <li>
+      <strong>Passo 7 — Upload do código e teste inicial</strong><br>
+      Conecte ao PC, abra a IDE Arduino, selecione placa e porta e faça upload do sketch. Teste pressionando teclas:
+      um bip curto a cada tecla; digite senha e pressione "#" para confirmar.
+    </li>
+
+    <li>
+      <strong>Passo 8 — Calibração e montagem final</strong><br>
+      Ajuste ângulos do servo (fechado/aberto) no código, ajuste tempos (quanto tempo permanece aberto) e teste várias vezes.
+      Faça testes reais após fixar tudo no cofre; documente a senha final e as configurações.
+    </li>
+  </ol>
+  </section>
+
+
+    <section class="card">
+    <h3>Calibração rápida e dicas</h3>
+    <ul>
+      <li>Ajuste <code>lockServo.write(0)</code> e <code>lockServo.write(90)</code> para ângulos que permitam a trava abrir/fechar sem esforço.</li>
+      <li>Se o servo tremular, aumente a alimentação (use power bank com boa corrente) ou adicione condensador entre 5V e GND.</li>
+      <li>Modifique <code>senhaCorreta</code> antes de usar no cofre final.</li>
+      <li>Documente a posição final do servo, pinos usados e versão do código para replicação.</li>
+    </ul>
+
+    <h3>Solução de problemas comuns</h3>
+    <ul>
+      <li><strong>Sem bip ao pressionar:</strong> verifique buzzer e pino no código.</li>
+      <li><strong>Servo não gira:</strong> confira alimentação e se o pino está correto; teste servo isoladamente.</li>
+      <li><strong>Teclas não respondem:</strong> verifique conexão das linhas/colunas do keypad e os pinos em <code>rowPins</code>/<code>colPins</code>.</li>
+      <li><strong>Comportamento errático:</strong> cheque conexões, evite fios soltos e aumente delay entre leituras se necessário.</li>
+    </ul>
+</section>
+  
+
+<button id="topBtn">↑ Topo</button>
+<script src="index.js"></script>
+</body>
+</html>
